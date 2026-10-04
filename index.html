@@ -1,0 +1,373 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zayzana Enquiry Engine</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#06111f;color:#eaf3ff;font-family:Arial,sans-serif}
+header{background:#091a2d;border-bottom:1px solid #183651;padding:22px 30px}
+.brand{color:#55d6c2;font-weight:700;letter-spacing:2px;font-size:13px}
+h1{margin:6px 0;font-size:27px}
+.sub{color:#91a8bf}
+main{max-width:1250px;margin:auto;padding:24px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.stat,.card,.workflow{background:#0c1d31;border:1px solid #193a57;border-radius:12px}
+.stat{padding:16px}
+.stat small{color:#829ab1}
+.stat strong{display:block;font-size:25px;margin-top:5px}
+.stat span{font-size:11px;color:#718ba2}
+.workflow{padding:17px;margin-bottom:20px}
+.workflow-title{font-size:13px;color:#829ab1;text-transform:uppercase;letter-spacing:1px;margin-bottom:13px}
+.steps{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.step{padding:9px 13px;border-radius:20px;background:#19354d;font-size:12px}
+.arrow{color:#55d6c2}
+.grid{display:grid;grid-template-columns:300px 1fr;gap:20px}
+.card{padding:20px}
+h2{font-size:17px;margin-top:0}
+.queue-item{padding:14px;border:1px solid #1d3c58;border-radius:9px;margin-bottom:10px;cursor:pointer}
+.queue-item:hover{background:#10263d}
+.queue-item.active{border-color:#55d6c2}
+.qname{font-weight:bold}
+.qproblem{font-size:13px;color:#8fa7bd;margin-top:5px}
+.badge{display:inline-block;padding:4px 8px;border-radius:12px;font-size:10px;font-weight:bold;margin-top:8px}
+.urgent{background:#51252a;color:#ffb5ba}
+.high{background:#4b3b20;color:#ffd98a}
+.normal{background:#20394d;color:#a9c8df}
+.scenarios{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px}
+.scenarios button{margin:0;background:#19354d;color:#dcecff}
+.scenarios button.active{background:#55d6c2;color:#06131f}
+button{border:0;border-radius:7px;padding:11px 15px;background:#55d6c2;color:#06131f;font-weight:bold;cursor:pointer}
+button:hover{filter:brightness(1.08)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.box{background:#071524;border-radius:8px;padding:13px}
+.key{font-size:10px;color:#7792aa;text-transform:uppercase;letter-spacing:1px}
+.value{margin-top:5px}
+.panel{margin-top:18px;border-top:1px solid #1b3852;padding-top:17px}
+.response{line-height:1.55;color:#dbe9f5}
+.status{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.status button{margin:0;background:#19354d;color:#cfe1f1}
+.status button.selected{background:#55d6c2;color:#06131f}
+.value-note{font-size:11px;color:#6f879c;margin-top:5px}
+.what{margin-top:20px;padding:17px;border-radius:10px;background:#071524;border:1px solid #183651}
+.what h3{margin:0 0 10px;font-size:14px}
+.what p{color:#a8bbcd;font-size:13px;line-height:1.5}
+.demo-note{font-size:11px;color:#6f879c;margin-top:20px}
+@media(max-width:850px){
+.stats{grid-template-columns:1fr 1fr}
+.grid{grid-template-columns:1fr}
+.row{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="brand">ZAYZANA TECH</div>
+<h1>Plumbing Enquiry Engine</h1>
+<div class="sub">From incoming enquiry to organised action.</div>
+</header>
+
+<main>
+
+<div class="stats">
+<div class="stat"><small>ENQUIRIES</small><strong id="enquiryCount">12</strong><span>sample monthly volume</span></div>
+<div class="stat"><small>URGENT</small><strong id="urgentCount">4</strong><span>need immediate attention</span></div>
+<div class="stat"><small>FOLLOW-UP</small><strong id="followCount">3</strong><span>currently needing action</span></div>
+<div class="stat"><small>OPPORTUNITY</small><strong id="opportunityCount">2</strong><span>potential jobs recovered</span></div>
+</div>
+
+<div class="workflow">
+<div class="workflow-title">The Zayzana workflow</div>
+<div class="steps">
+<div class="step">Capture</div>
+<div class="arrow">→</div>
+<div class="step">Qualify</div>
+<div class="arrow">→</div>
+<div class="step">Prioritise</div>
+<div class="arrow">→</div>
+<div class="step">Route</div>
+<div class="arrow">→</div>
+<div class="step">Follow Up</div>
+</div>
+</div>
+
+<div class="grid">
+
+<section class="card">
+<h2>Demo Scenarios</h2>
+
+<div class="scenarios">
+<button onclick="scenario(0,this)" class="active">Emergency Leak</button>
+<button onclick="scenario(1,this)">Blocked Drain</button>
+<button onclick="scenario(2,this)">Routine Repair</button>
+<button onclick="scenario(3,this)">Missed Enquiry</button>
+</div>
+
+<h2>Enquiry Queue</h2>
+
+<div class="queue-item active" onclick="loadEnquiry(0,this)">
+<div class="qname">John</div>
+<div class="qproblem">Geyser leaking badly — Durban North</div>
+<span class="badge urgent">URGENT</span>
+</div>
+
+<div class="queue-item" onclick="loadEnquiry(1,this)">
+<div class="qname">Sarah</div>
+<div class="qproblem">Blocked drain — Umhlanga</div>
+<span class="badge high">HIGH</span>
+</div>
+
+<div class="queue-item" onclick="loadEnquiry(2,this)">
+<div class="qname">Mike</div>
+<div class="qproblem">Bathroom tap replacement — Glenwood</div>
+<span class="badge normal">NORMAL</span>
+</div>
+
+<div class="what">
+<h3>What Zayzana does</h3>
+<p>
+We don't need to replace the systems a business already uses.
+The idea is to improve the workflow around incoming enquiries so repetitive checking, qualification, routing and follow-up can be handled more efficiently.
+</p>
+</div>
+
+</section>
+
+<section class="card">
+
+<h2>Enquiry Intelligence</h2>
+
+<div class="row">
+<div class="box">
+<div class="key">Customer</div>
+<div class="value" id="name"></div>
+</div>
+<div class="box">
+<div class="key">Location</div>
+<div class="value" id="location"></div>
+</div>
+</div>
+
+<div class="panel">
+<div class="key">Original enquiry</div>
+<div class="value" id="enquiry"></div>
+</div>
+
+<div class="row panel">
+<div class="box">
+<div class="key">Problem</div>
+<div class="value" id="problem"></div>
+</div>
+<div class="box">
+<div class="key">Job type</div>
+<div class="value" id="job"></div>
+</div>
+</div>
+
+<div class="row panel">
+<div class="box">
+<div class="key">Priority</div>
+<div class="value" id="priority"></div>
+</div>
+<div class="box">
+<div class="key">Recommended action</div>
+<div class="value" id="action"></div>
+</div>
+</div>
+
+<div class="panel">
+<div class="key">Customer response draft</div>
+<div class="box response" id="response"></div>
+</div>
+
+<div class="panel">
+<div class="key">Workflow status</div>
+<div class="status">
+<button onclick="setStatus('New',this)" class="selected">New</button>
+<button onclick="setStatus('Qualified',this)">Qualified</button>
+<button onclick="setStatus('Actioned',this)">Actioned</button>
+<button onclick="setStatus('Follow-up',this)">Follow-up</button>
+</div>
+</div>
+
+<div class="demo-note">
+Zayzana Tech prototype — production implementation would connect to the business's existing enquiry, CRM, booking or messaging systems.
+</div>
+
+</section>
+</div>
+</main>
+
+<script>
+
+const enquiries=[
+{
+name:"John",
+location:"Durban North",
+enquiry:"Hi, my geyser is leaking badly. I'm in Durban North. Can someone come today?",
+problem:"Geyser leak",
+job:"Emergency plumbing",
+priority:"URGENT",
+action:"Route to emergency plumbing team immediately. Confirm safety, availability and dispatch details.",
+response:"Thanks for contacting us, John. We've received your enquiry regarding the geyser leak in Durban North. We're checking availability and will get back to you shortly.",
+status:"New"
+},
+{
+name:"Sarah",
+location:"Umhlanga",
+enquiry:"Our kitchen drain is completely blocked and water is backing up.",
+problem:"Blocked drain",
+job:"Drainage",
+priority:"HIGH",
+action:"Check technician availability and arrange a service call.",
+response:"Thanks for contacting us, Sarah. We've received your enquiry regarding the blocked drain in Umhlanga. We're checking availability and will get back to you shortly.",
+status:"Follow-up"
+},
+{
+name:"Mike",
+location:"Glenwood",
+enquiry:"I need a bathroom tap replaced. Not urgent.",
+problem:"Tap replacement",
+job:"General plumbing",
+priority:"NORMAL",
+action:"Add to standard service queue and confirm suitable appointment time.",
+response:"Thanks for contacting us, Mike. We've received your enquiry regarding the tap replacement in Glenwood. We'll confirm a suitable appointment time shortly.",
+status:"New"
+}
+];
+
+const scenarios=[
+{
+name:"Emergency customer",
+location:"Durban North",
+enquiry:"My geyser is leaking badly. Can someone come today?",
+problem:"Geyser leak",
+job:"Emergency plumbing",
+priority:"URGENT",
+action:"Route immediately to the emergency team and confirm availability."
+},
+{
+name:"Sarah",
+location:"Umhlanga",
+enquiry:"Our kitchen drain is blocked and water is backing up.",
+problem:"Blocked drain",
+job:"Drainage",
+priority:"HIGH",
+action:"Prioritise the enquiry and arrange a technician."
+},
+{
+name:"Mike",
+location:"Glenwood",
+enquiry:"I need a bathroom tap replaced. Not urgent.",
+problem:"Tap replacement",
+job:"General plumbing",
+priority:"NORMAL",
+action:"Place into the standard service workflow and confirm an appointment."
+},
+{
+name:"Missed caller",
+location:"Unknown",
+enquiry:"Missed call — customer has not yet been contacted.",
+problem:"Unknown",
+job:"Needs qualification",
+priority:"HIGH",
+action:"Create a follow-up task and contact the customer before the opportunity is lost."
+}
+];
+
+let current=0;
+
+function display(x){
+document.getElementById("name").textContent=x.name;
+document.getElementById("location").textContent=x.location;
+document.getElementById("enquiry").textContent=x.enquiry;
+document.getElementById("problem").textContent=x.problem;
+document.getElementById("job").textContent=x.job;
+document.getElementById("priority").textContent=x.priority;
+document.getElementById("action").textContent=x.action;
+document.getElementById("response").textContent=
+x.response || ("Thanks for contacting us, "+x.name+". We've received your enquiry and are checking the next available step.");
+}
+
+function loadEnquiry(i,el){
+current=i;
+document.querySelectorAll(".queue-item").forEach(e=>e.classList.remove("active"));
+if(el)el.classList.add("active");
+display(enquiries[i]);
+}
+
+function scenario(i,button){
+document.querySelectorAll(".scenarios button").forEach(b=>b.classList.remove("active"));
+button.classList.add("active");
+display(scenarios[i]);
+}
+
+function setStatus(status,button){
+document.querySelectorAll(".status button").forEach(b=>b.classList.remove("selected"));
+button.classList.add("selected");
+}
+
+display(enquiries[0]);
+
+</script>
+
+<style>
+.step{transition:.2s}
+.step.done{background:#55d6c2;color:#06131f}
+.step.current{background:#294d67;border:1px solid #55d6c2;box-shadow:0 0 0 1px #55d6c233}
+.step.waiting{opacity:.45}
+</style>
+
+<script>
+function updateWorkflow(stage){
+  const steps=[...document.querySelectorAll(".step")];
+  const positions={
+    "New":0,
+    "Qualified":1,
+    "Actioned":3,
+    "Follow-up":4
+  };
+  const current=positions[stage] ?? 0;
+
+  steps.forEach((step,i)=>{
+    step.classList.remove("done","current","waiting");
+
+    if(i<current) step.classList.add("done");
+    else if(i===current) step.classList.add("current");
+    else step.classList.add("waiting");
+  });
+}
+
+function setStatus(status,button){
+  document.querySelectorAll(".status button")
+    .forEach(b=>b.classList.remove("selected"));
+
+  button.classList.add("selected");
+
+  updateWorkflow(status);
+}
+
+function display(x){
+  document.getElementById("name").textContent=x.name;
+  document.getElementById("location").textContent=x.location;
+  document.getElementById("enquiry").textContent=x.enquiry;
+  document.getElementById("problem").textContent=x.problem;
+  document.getElementById("job").textContent=x.job;
+  document.getElementById("priority").textContent=x.priority;
+  document.getElementById("action").textContent=x.action;
+
+  document.getElementById("response").textContent=
+    x.response ||
+    ("Thanks for contacting us, "+x.name+
+    ". We've received your enquiry and are checking the next available step.");
+
+  updateWorkflow(x.status || "New");
+}
+
+display(enquiries[0]);
+</script>
+</body>
+</html>
