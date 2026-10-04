@@ -1,0 +1,4 @@
+ID,Area,Item,Status,Priority,Owner,Next Action,Due Date,Notes
+1,Product,Plumbing Enquiry Engine,Prototype Frozen,High,Zayn,Use for prospect demos,,V1 frozen
+2,Commercial,Overseas Plumbing Campaign,Active,High,Zayn,Continue 5-day follow-up workflow,,UK USA Canada Australia NZ
+3,Commercial,Demo Offer,Ready,High,Zayn,Use Enquiry Engine in prospect conversations,,Pilot/implementation opportunity
