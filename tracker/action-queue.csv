@@ -1,5 +1,6 @@
 ID,Priority,Area,Action,Status,Due Date,Notes
-1,High,Commercial,Review overseas plumbing follow-ups after 5 business days,Open,,Check UK USA Canada Australia NZ
-2,High,Commercial,Review final follow-ups after 10-12 business days,Open,,No automatic sending
+1,High,Commercial,Review overseas plumbing follow-ups after 5 business days,Open,2026-10-09,Check UK USA Canada Australia NZ
+2,High,Commercial,Review final follow-ups after 10-12 business days,Open,2026-10-16,No automatic sending
 3,High,Product,Use Enquiry Engine for prospect demos,Open,,Prototype V1 frozen
 4,Medium,Product,Collect prospect feedback and requested features,Open,,Only build when justified
+5,High,Commercial,Reconcile project outreach tracker with Command Centre prospect tracker,Open,,Keep one source of truth for detailed overseas prospect rows
