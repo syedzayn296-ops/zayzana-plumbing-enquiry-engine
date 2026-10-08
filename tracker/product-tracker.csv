@@ -1,4 +1,5 @@
 ID,Area,Item,Status,Priority,Owner,Next Action,Due Date,Notes
 1,Product,Plumbing Enquiry Engine,Prototype Frozen,High,Zayn,Use for prospect demos,,V1 frozen
-2,Commercial,Overseas Plumbing Campaign,Active,High,Zayn,Continue 5-day follow-up workflow,,UK USA Canada Australia NZ
+2,Commercial,Overseas Plumbing Campaign,Active,High,Zayn,Continue 5-day follow-up workflow,2026-10-09,UK/USA/Canada/Australia/NZ; prospect details maintained in Command Centre overseas tracker
 3,Commercial,Demo Offer,Ready,High,Zayn,Use Enquiry Engine in prospect conversations,,Pilot/implementation opportunity
+4,Commercial,Pipeline Integrity,Needs Reconciliation,High,Zayn,Keep outreach status aligned with Command Centre prospect tracker,,Avoid duplicate or conflicting prospect records
